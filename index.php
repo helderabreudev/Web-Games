@@ -26,7 +26,7 @@
               while($reg = $busca->fetch_object()) {
                 $t = thumb($reg->capa);
                 echo "<tr><td><img src='$t'/>";
-                echo "<td><a href='detalhes.php'>$reg->nome</a>";
+                echo "<td><a href='detalhes.php?cod=$reg->cod'>$reg->nome</a>";
                 echo "<td>Adm";
               }
             }
