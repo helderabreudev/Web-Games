@@ -11,20 +11,39 @@
   <?php 
     require_once "includes/banco.php";
     require_once "includes/funcoes.php";
+    $ordem = $_GET['o'] ?? "n";
   ?>
   <div class="container">
-    <?php
-      include_once "topo.php"
-    ?>
+    <?php include_once "topo.php" ?>
       <h1>Escolha um jogo</h1>
-      <form method="GET" id="busca" action="index.php">
-        Ordernar: Nome | Produtora | Nota Alta | Nota Baixa |
+      <form method="get" id="busca" action="index.php">
+        Ordernar: 
+        <a href="index.php?o=n">Nome</a> | 
+        <a href="index.php?o=p">Produtora</a> | 
+        <a href="index.php?o=na">Nota Alta</a> | 
+        <a href="index.php?o=nb">Nota Baixa</a> |
         <input type="text" name="c" size="10" maxlength="40"/>
         <input type="submit" value="pesquisar">
       </form>
       <table class="list">
         <?php
           $query = "select * from jogos j join generos g on j.genero = g.cod join produtoras p on j.produtora = p.cod";
+  
+          switch ($ordem) {
+            case "p": 
+              $query = "$query ORDER BY p.produtora"; /* . Concatena o texto */
+              break;
+            case "na":
+              $query = "$query ORDER BY j.nota DESC";
+              break;
+            case "nb":
+              $query = "$query ORDER BY j.nota ASC";
+              break;
+            default: 
+              $query = "$query ORDER BY j.nome";
+              break;
+          }
+
           $busca = $banco->query("$query");
           if(!$busca) {
             echo "<tr><td>infelizmente a busca deu errado";
