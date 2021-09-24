@@ -13,10 +13,19 @@
     require_once "includes/funcoes.php";
   ?>
   <div class="container">
+    <?php
+      include_once "topo.php"
+    ?>
       <h1>Escolha um jogo</h1>
+      <form method="GET" id="busca" action="index.php">
+        Ordernar: Nome | Produtora | Nota Alta | Nota Baixa |
+        <input type="text" name="c" size="10" maxlength="40"/>
+        <input type="submit" value="pesquisar">
+      </form>
       <table class="list">
         <?php
-          $busca = $banco->query("select * from jogos order by nome");
+          $query = "select * from jogos j join generos g on j.genero = g.cod join produtoras p on j.produtora = p.cod";
+          $busca = $banco->query("$query");
           if(!$busca) {
             echo "<tr><td>infelizmente a busca deu errado";
           } else {
@@ -27,6 +36,8 @@
                 $t = thumb($reg->capa);
                 echo "<tr><td><img src='$t'/>";
                 echo "<td><a href='detalhes.php?cod=$reg->cod'>$reg->nome</a>";
+                echo " [$reg->genero]";
+                echo "<br/>$reg->produtora";
                 echo "<td>Adm";
               }
             }
@@ -34,6 +45,9 @@
         ?>
       </table>
   </div>
-  <?php $banco->close(); ?>
+  <?php 
+  include_once 'rodape.php';
+  $banco->close(); 
+  ?>
 </body>
 </html>
