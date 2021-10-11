@@ -61,4 +61,33 @@ form {
   padding-bottom: 1em;
 }
 
+div.sucesso {
+  padding: 7px 15px;
+  color: rgb(9, 102, 9);
+  background-color: rgba(41, 199, 94, 0.486);
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+div.aviso {
+  padding: 7px 15px;
+  color: rgb(134, 110,66);
+  background-color: rgba(251, 248, 229);
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+div.erro {
+  padding: 7px 15px;
+  color: rgb(157, 75, 69);
+  background-color: rgba(239, 223, 222);
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.container-form form {
+  text-align: left;
+  line-height: 2;
+}
+
 
